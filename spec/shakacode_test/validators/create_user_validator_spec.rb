@@ -1,4 +1,4 @@
-RSpec.describe CreateUserValidator, type: :validator do
+describe CreateUserValidator, type: :validator do
   subject { described_class.new(params) }
 
   context 'with valid params' do

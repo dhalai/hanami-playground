@@ -1,5 +1,6 @@
 RSpec.describe Web::Controllers::Users::Create, type: :action do
-  let(:action) { described_class.new }
+  let(:interactor) { instance_double("Users::Create", call: nil) }
+  let(:action) { described_class.new(interactor: interactor) }
   let(:repository) { UserRepository.new }
 
   before { repository.clear }
@@ -15,15 +16,9 @@ RSpec.describe Web::Controllers::Users::Create, type: :action do
       ]
     end
 
-    it 'creates a new user' do
+    it 'calls interactor' do
+      expect(interactor).to receive(:call)
       action.call(params)
-      user = repository.last
-
-      expect(user.id).to_not eq nil
-
-      params.dig(:user).each do |field, data|
-        expect(user.send(field)).to eq data
-      end
     end
 
     it 'redirects the user to the users listing' do
@@ -40,6 +35,11 @@ RSpec.describe Web::Controllers::Users::Create, type: :action do
     it 'returns error' do
       response = action.call(params)
       expect(response[0]).to eq 422
+    end
+
+    it 'does not call interactor' do
+      expect(interactor).to_not receive(:call)
+      action.call(params)
     end
 
     it 'returns errors in params' do

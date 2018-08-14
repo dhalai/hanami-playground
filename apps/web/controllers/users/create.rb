@@ -4,9 +4,13 @@ module Web::Controllers::Users
 
     expose :user, :errors
 
-    def call(params)
-      if validation_result.success?
-        UserRepository.new.create(params[:user])
+    def initialize(interactor: Users::Creator.new)
+      @interactor = interactor
+    end
+
+    def call(_params)
+      if valid?
+        @interactor.call(params[:user])
         redirect_to routes.users_path
       else
         @errors = validation_result.messages
@@ -15,6 +19,10 @@ module Web::Controllers::Users
     end
 
     private
+
+    def valid?
+      validation_result.success?
+    end
 
     def validation_result
       @validation_result ||= validator.validate

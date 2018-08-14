@@ -8,6 +8,8 @@ gem 'hanami-model', '~> 1.2'
 
 gem 'pg'
 
+gem 'bcrypt'
+
 group :development do
   gem 'shotgun', platforms: :ruby
   gem 'hanami-webconsole'
