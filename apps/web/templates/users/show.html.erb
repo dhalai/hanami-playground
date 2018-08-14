@@ -1,0 +1,12 @@
+<h1>User #<%= user.id %></h1>
+
+<% user.to_h.each do |field, value| %>
+  <div>
+    <span><b><%= field.capitalize %>:</b></span>
+    <span><%= value %></span>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to "Back", routes.users_path %>
+</div>

@@ -1,0 +1,23 @@
+# Please keep AllCops, Bundler, Style, Metrics groups and then order cops
+# alphabetically
+inherit_from:
+  - https://raw.githubusercontent.com/hanami/devtools/master/.rubocop.yml
+AllCops:
+  Exclude:
+    - "spec/support/**/*"
+Documentation:
+  Enabled: false
+Layout/IndentHeredoc:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/MixinGrouping:
+  Exclude:
+    - "spec/support/**/*"
+Metrics/BlockLength:
+  Exclude:
+    - "apps/web/application.rb"
+    - "spec/**/*"
+Style/BlockComments:
+  Exclude:
+    - "spec/spec_helper.rb"

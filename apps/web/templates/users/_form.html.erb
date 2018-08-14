@@ -1,0 +1,36 @@
+<% if errors %>
+  <div class="errors">
+    <h3>There was a problem with your submission</h3>
+    <ul>
+      <% form_errors.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%=
+  form_for form do
+    div class: 'input' do
+      label :email
+      email_field :email
+    end
+
+    div class: 'input' do
+      label :password
+      password_field :password
+    end
+
+    div class: 'input' do
+      radio_button :role, 'User', id: 'user-role'
+      label :user, for: 'user-role'
+
+      radio_button :role, 'Admin', id: 'admin-role'
+      label :admin, for: 'admin-role'
+    end
+
+    div class: 'controls' do
+      submit submit_label
+    end
+  end
+%>

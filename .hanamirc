@@ -1,0 +1,3 @@
+project=shakacode_test
+test=rspec
+template=erb

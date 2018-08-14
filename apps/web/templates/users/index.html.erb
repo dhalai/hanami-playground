@@ -1,0 +1,20 @@
+<h1>Users</h1>
+
+<%= link_to 'New User', routes.path(:new_user) %>
+
+<% if users.any? %>
+  <div class="users">
+    <% users.each do |user| %>
+      <div class="user">
+        <span>#<%= user.id %></span>
+        <span><%= user.email %></span>
+        <span><%= user.role %></span>
+        <span><%= link_to 'show', routes.path(:user, user.id) %></span>
+        <span><%= link_to 'edit', routes.path(:edit_user, user.id) %></span>
+        <span><%= delete_link(user) %></span>
+      <div>
+    <% end%>
+  <div>
+<% else %>
+  <p>There are no users yet.</p>
+<% end %>
