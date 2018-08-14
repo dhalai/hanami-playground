@@ -10,7 +10,7 @@ RSpec.describe Web::Controllers::Users::Create, type: :action do
         user: {
           email: "some@email.com",
           password: "some_password",
-          role: "admin"
+          role: "Admin"
         }
       ]
     end
@@ -47,8 +47,8 @@ RSpec.describe Web::Controllers::Users::Create, type: :action do
       errors = action.errors
 
       expect(errors.dig(:user, :email)).to eq ['is missing']
-      expect(errors.dig(:user, :password)).to eq ['is missing']
-      expect(errors.dig(:user, :role)).to eq ['is missing']
+      expect(errors.dig(:user, :password)).to eq ['is missing', 'size cannot be less than 8']
+      expect(errors.dig(:user, :role)).to eq ['is missing', 'must be one of: User, Admin']
     end
   end
 end
