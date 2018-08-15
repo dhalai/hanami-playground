@@ -1,5 +1,5 @@
 RSpec.describe Web::Controllers::Users::Create, type: :action do
-  let(:interactor) { instance_double("Users::Create", call: nil) }
+  let(:interactor) { instance_double("Users::Creator", call: nil) }
   let(:action) { described_class.new(interactor: interactor) }
   let(:repository) { UserRepository.new }
 

@@ -1,5 +1,6 @@
 RSpec.describe Web::Controllers::Users::Update, type: :action do
-  let(:action) { described_class.new }
+  let(:interactor) { instance_double("Users::Updater", call: nil) }
+  let(:action) { described_class.new(interactor: interactor) }
 
   let(:user_params) do
     {
@@ -19,6 +20,11 @@ RSpec.describe Web::Controllers::Users::Update, type: :action do
         expect(response[0]).to eq 302
         expect(response[1]['Location']).to eq '/users'
       end
+
+      it 'does not call interactor' do
+        expect(interactor).to_not receive(:call)
+        action.call(params)
+      end
     end
 
     context "with valid params" do
@@ -29,6 +35,11 @@ RSpec.describe Web::Controllers::Users::Update, type: :action do
 
         expect(response[0]).to eq 302
         expect(response[1]['Location']).to eq '/users'
+      end
+
+      it 'does not call interactor' do
+        expect(interactor).to_not receive(:call)
+        action.call(params)
       end
     end
   end
@@ -46,6 +57,11 @@ RSpec.describe Web::Controllers::Users::Update, type: :action do
         response = action.call(params)
         expect(response[0]).to eq 422
       end
+
+      it 'does not call interactor' do
+        expect(interactor).to_not receive(:call)
+        action.call(params)
+      end
     end
 
     context "with valid params" do
@@ -53,12 +69,13 @@ RSpec.describe Web::Controllers::Users::Update, type: :action do
       let(:params) do
         Hash[
           id: user.id.to_s,
-          user: user_params.merge(email: new_email)
+          user: user_params
         ]
       end
 
-      it 'updates the user' do
-        expect { action.call(params) }.to change { repository.last.email }.to(new_email)
+      it 'calls interactor' do
+        expect(interactor).to receive(:call)
+        action.call(params)
       end
 
       it 'redirects the user to the users listing' do

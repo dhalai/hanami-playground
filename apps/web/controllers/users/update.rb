@@ -4,6 +4,10 @@ module Web::Controllers::Users
 
     expose :user, :errors
 
+    def initialize(interactor: Users::Updater.new)
+      @interactor = interactor
+    end
+
     def call(_params)
       return redirect_to routes.users_path unless valid?
       update_user
@@ -26,7 +30,7 @@ module Web::Controllers::Users
 
     def update_user
       if validation_result.success?
-        repository.update(params[:id], params[:user])
+        @interactor.call(params)
         redirect_to routes.users_path
       else
         @errors = validation_result.messages

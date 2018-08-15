@@ -1,7 +1,7 @@
 require 'hanami/interactor'
 
 module Users
-  class Creator
+  class Updater
     include Hanami::Interactor
 
     expose :user
@@ -12,10 +12,11 @@ module Users
     end
 
     def call(params)
-      @user = @repository.create(
-        params.merge(
+      @user = @repository.update(
+        params[:id],
+        params[:user].merge(
           password: generate_password(
-            params[:password]
+            params[:user][:password]
           )
         )
       )
