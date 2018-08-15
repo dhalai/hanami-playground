@@ -6,7 +6,7 @@ describe 'List users' do
   before do
     repository.clear
 
-    2.times do
+    user_count.times do
       params = {
         email: SecureRandom.hex,
         password: SecureRandom.hex,
@@ -16,11 +16,38 @@ describe 'List users' do
     end
   end
 
-  it 'displyas each user on the page' do
-    visit '/users'
+  context "without pagination" do
+    let(:user_count) { 2 }
 
-    within '.users' do
-      expect(page).to have_selector('.user', count: 2)
+    it 'displyas each user on the page' do
+      visit '/users'
+
+      within '.users' do
+        expect(page).to have_selector('.user', count: user_count)
+      end
+    end
+
+    it 'does not display the pagination' do
+      visit '/users'
+      expect(page).to_not have_selector('.paginator')
+    end
+  end
+
+  context "with pagination" do
+    let(:user_count) { 20 }
+    let(:users_per_page) { 10 }
+
+    it 'displyas each user on the page' do
+      visit '/users'
+
+      within '.users' do
+        expect(page).to have_selector('.user', count: users_per_page)
+      end
+    end
+
+    it 'displays the pagination' do
+      visit '/users'
+      expect(page).to have_selector('.paginator')
     end
   end
 end

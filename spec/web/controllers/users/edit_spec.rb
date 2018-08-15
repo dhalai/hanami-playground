@@ -1,4 +1,4 @@
-RSpec.describe Web::Controllers::Users::Edit, type: :action do
+describe Web::Controllers::Users::Edit, type: :action do
   let(:action) { described_class.new }
   let(:repository) { UserRepository.new }
 

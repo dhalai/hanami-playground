@@ -1,4 +1,4 @@
-RSpec.describe Web::Controllers::Users::Update, type: :action do
+describe Web::Controllers::Users::Update, type: :action do
   let(:interactor) { instance_double("Users::Updater", call: nil) }
   let(:action) { described_class.new(interactor: interactor) }
 

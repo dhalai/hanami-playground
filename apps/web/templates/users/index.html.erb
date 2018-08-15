@@ -2,9 +2,9 @@
 
 <%= link_to 'New User', routes.path(:new_user) %>
 
-<% if users.any? %>
+<% if paginator.result.any? %>
   <div class="users">
-    <% users.each do |user| %>
+    <% paginator.result.each do |user| %>
       <div class="user">
         <span>#<%= user.id %></span>
         <span><%= user.email %></span>
@@ -18,3 +18,5 @@
 <% else %>
   <p>There are no users yet.</p>
 <% end %>
+
+<%= paginator.pagination %>

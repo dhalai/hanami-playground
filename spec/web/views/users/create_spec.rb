@@ -1,4 +1,4 @@
-RSpec.describe Web::Views::Users::Create, type: :view do
+describe Web::Views::Users::Create, type: :view do
   let(:exposures) { Hash[format: :html] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/users/create.html.erb') }
   let(:view)      { described_class.new(template, exposures) }

@@ -1,4 +1,4 @@
-RSpec.describe Web::Controllers::Users::Destroy, type: :action do
+describe Web::Controllers::Users::Destroy, type: :action do
   let(:action) { described_class.new }
 
   context "with valid params" do

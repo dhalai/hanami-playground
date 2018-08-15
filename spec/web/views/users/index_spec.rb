@@ -1,16 +1,15 @@
-RSpec.describe Web::Views::Users::Index, type: :view do
-  let(:exposures) { Hash[params: {}, users: []] }
+describe Web::Views::Users::Index, type: :view do
+  let(:paginator) { OpenStruct.new(result: result, rendered: "") }
+  let(:exposures) { Hash[params: {}, paginator: paginator] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/users/index.html.erb') }
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }
 
   let(:placeholder) { '<p>There are no users yet.</p>' }
 
-  it 'exposes #users' do
-    expect(view.users).to eq exposures.fetch(:users)
-  end
-
   context 'without users' do
+    let(:result) { [] }
+
     it 'shows a placeholder message' do
       expect(rendered).to include(placeholder)
     end
@@ -35,7 +34,7 @@ RSpec.describe Web::Views::Users::Index, type: :view do
       )
     end
 
-    let(:exposures) { Hash[params: {}, users: [user_1, user_2]] }
+    let(:result) { [user_1, user_2] }
 
     it 'shows all users' do
       expect(rendered.scan(/class="user"/).count).to eq 2

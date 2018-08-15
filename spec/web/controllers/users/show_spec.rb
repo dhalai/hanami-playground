@@ -1,4 +1,4 @@
-RSpec.describe Web::Controllers::Users::Show, type: :action do
+describe Web::Controllers::Users::Show, type: :action do
   let(:action) { described_class.new }
 
   context "with nonexistent user" do
