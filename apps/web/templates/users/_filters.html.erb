@@ -1,0 +1,22 @@
+<div class="filters">
+  <h2>Filters</h2>
+  <%=
+    form_for :filters, routes.users_path, method: :get do
+      div class: 'input' do
+        label :email
+        text_field :email
+      end
+
+      fields_for :role do
+        user_roles.each do |role|
+          check_box role.to_sym, value: role
+          label role.to_sym
+        end
+      end
+
+      div class: 'controls' do
+        submit "Filter"
+      end
+    end
+  %>
+</div>

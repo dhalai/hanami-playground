@@ -1,6 +1,6 @@
 describe Web::Views::Users::Index, type: :view do
   let(:paginator) { OpenStruct.new(result: result, rendered: "") }
-  let(:exposures) { Hash[params: {}, paginator: paginator] }
+  let(:exposures) { Hash[format: :html, params: {}, paginator: paginator] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/users/index.html.erb') }
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }

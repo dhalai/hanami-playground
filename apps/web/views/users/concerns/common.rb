@@ -3,6 +3,10 @@ module Web::Views::Users
     module Common
       include Hanami::Helpers
 
+      def user_roles
+        UserRepository::USER_ROLES
+      end
+
       def form_errors
         errors[:user].each_with_object([]) do |(field, msg), acc|
           acc << "#{field.capitalize} #{msg.join(', ')}"

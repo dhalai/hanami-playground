@@ -9,6 +9,10 @@ module Web::Views::Users
       end
     end
 
+    def user_roles
+      UserRepository::USER_ROLES
+    end
+
     private
 
     def form(user)

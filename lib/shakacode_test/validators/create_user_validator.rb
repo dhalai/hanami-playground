@@ -9,7 +9,7 @@ class CreateUserValidator
     required(:user).schema do
       required(:email) { filled? & str? & format?(EMAIL_FORMAT) }
       required(:password) { filled? & str? & min_size?(8) }
-      required(:role) { filled? & str? & included_in?(%w[User Admin]) }
+      required(:role) { filled? & str? & included_in?(UserRepository::USER_ROLES) }
     end
   end
 end

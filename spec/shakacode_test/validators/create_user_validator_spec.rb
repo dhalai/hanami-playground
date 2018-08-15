@@ -7,7 +7,7 @@ describe CreateUserValidator, type: :validator do
         user: {
           email: "some@email.com",
           password: "some_password",
-          role: "Admin"
+          role: "admin"
         }
       }
     end
@@ -48,7 +48,7 @@ describe CreateUserValidator, type: :validator do
           user: {
             email: ["is in invalid format"],
             password: ["size cannot be less than 8"],
-            role: ["must be one of: User, Admin"]
+            role: ["must be one of: user, admin"]
           }
         }
       end

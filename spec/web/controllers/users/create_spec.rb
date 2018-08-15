@@ -11,7 +11,7 @@ describe Web::Controllers::Users::Create, type: :action do
         user: {
           email: "some@email.com",
           password: "some_password",
-          role: "Admin"
+          role: "admin"
         }
       ]
     end
@@ -48,7 +48,7 @@ describe Web::Controllers::Users::Create, type: :action do
 
       expect(errors.dig(:user, :email)).to eq ['is missing']
       expect(errors.dig(:user, :password)).to eq ['is missing', 'size cannot be less than 8']
-      expect(errors.dig(:user, :role)).to eq ['is missing', 'must be one of: User, Admin']
+      expect(errors.dig(:user, :role)).to eq ['is missing', 'must be one of: user, admin']
     end
   end
 end

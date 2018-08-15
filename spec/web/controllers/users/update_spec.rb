@@ -6,7 +6,7 @@ describe Web::Controllers::Users::Update, type: :action do
     {
       email: "some@email.com",
       password: "some_password",
-      role: "Admin"
+      role: "admin"
     }
   end
 

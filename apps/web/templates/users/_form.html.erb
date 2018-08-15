@@ -22,11 +22,10 @@
     end
 
     div class: 'input' do
-      radio_button :role, 'User', id: 'user-role'
-      label :user, for: 'user-role'
-
-      radio_button :role, 'Admin', id: 'admin-role'
-      label :admin, for: 'admin-role'
+      user_roles.each do |role|
+        radio_button :role, role, id: "#{role}-role"
+        label role.to_sym, for: "#{role}-role"
+      end
     end
 
     div class: 'controls' do

@@ -1,10 +1,16 @@
 describe Web::Controllers::Users::Index, type: :action do
   let(:params) { Hash[] }
-  let(:relation) { instance_double("UsersRelation") }
+  let(:repository) { instance_double("UsersRepository") }
   let(:paginator_result) { Hash[] }
   let(:paginator) { instance_double("Paginator", call: paginator_result) }
+  let(:filter_result) { OpenStruct.new(relation: {}) }
+  let(:filter) { instance_double("Filter", call: filter_result) }
   let(:action) do
-    described_class.new(relation: relation, paginator: paginator)
+    described_class.new(
+      repository: repository,
+      paginator: paginator,
+      filter: filter
+    )
   end
 
   it 'is successful' do
