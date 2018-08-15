@@ -44,7 +44,7 @@ describe Web::Controllers::Users::Create, type: :action do
 
     it 'returns errors in params' do
       action.call(params)
-      errors = action.errors
+      errors = action.form_errors
 
       expect(errors.dig(:user, :email)).to eq ['is missing']
       expect(errors.dig(:user, :password)).to eq ['is missing', 'size cannot be less than 8']

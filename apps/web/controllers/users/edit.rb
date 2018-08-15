@@ -2,7 +2,7 @@ module Web::Controllers::Users
   class Edit
     include Web::Action
 
-    expose :user, :errors
+    expose :user, :form_errors
 
     def call(_params)
       return redirect_to routes.users_path unless valid?

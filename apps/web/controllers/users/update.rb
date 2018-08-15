@@ -2,7 +2,7 @@ module Web::Controllers::Users
   class Update
     include Web::Action
 
-    expose :user, :errors
+    expose :user, :form_errors
 
     def initialize(interactor: Users::Updater.new)
       @interactor = interactor
@@ -33,7 +33,7 @@ module Web::Controllers::Users
         @interactor.call(params)
         redirect_to routes.users_path
       else
-        @errors = validation_result.messages
+        @form_errors = validation_result.messages
         self.status = 422
       end
     end

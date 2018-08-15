@@ -2,7 +2,7 @@ module Web::Controllers::Users
   class Create
     include Web::Action
 
-    expose :user, :errors
+    expose :user, :form_errors
 
     def initialize(interactor: Users::Creator.new)
       @interactor = interactor
@@ -13,7 +13,7 @@ module Web::Controllers::Users
         @interactor.call(params[:user])
         redirect_to routes.users_path
       else
-        @errors = validation_result.messages
+        @form_errors = validation_result.messages
         self.status = 422
       end
     end

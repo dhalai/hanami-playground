@@ -1,8 +1,8 @@
-<% if errors %>
+<% if form_errors %>
   <div class="errors">
     <h3>There was a problem with your submission</h3>
     <ul>
-      <% form_errors.each do |message| %>
+      <% errors.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>

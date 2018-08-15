@@ -7,8 +7,8 @@ module Web::Views::Users
         UserRepository::USER_ROLES
       end
 
-      def form_errors
-        errors[:user].each_with_object([]) do |(field, msg), acc|
+      def errors
+        form_errors[:user].each_with_object([]) do |(field, msg), acc|
           acc << "#{field.capitalize} #{msg.join(', ')}"
         end
       end
