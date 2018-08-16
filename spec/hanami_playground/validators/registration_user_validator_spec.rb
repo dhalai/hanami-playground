@@ -1,4 +1,4 @@
-describe CreateUserValidator, type: :validator do
+describe RegistrationUserValidator, type: :validator do
   subject { described_class.new(params) }
   let(:user) { nil }
   let(:repository) { instance_double("UserRepository", find_by_email: user) }
@@ -12,8 +12,7 @@ describe CreateUserValidator, type: :validator do
       {
         user: {
           email: "some@email.com",
-          password: "some_password",
-          role: "admin"
+          password: "some_password"
         }
       }
     end
@@ -56,8 +55,7 @@ describe CreateUserValidator, type: :validator do
       let(:user_params) do
         {
           email: "invalid_email",
-          password: "invalid",
-          role: "invalid_role"
+          password: "invalid"
         }
       end
 
@@ -66,8 +64,7 @@ describe CreateUserValidator, type: :validator do
         {
           user: {
             email: ["is in invalid format"],
-            password: ["size cannot be less than 8"],
-            role: ["must be one of: user, admin"]
+            password: ["size cannot be less than 8"]
           }
         }
       end

@@ -1,5 +1,15 @@
 describe Web::Controllers::Sessions::Create, type: :action do
-  let(:action) { described_class.new }
+  let(:repository) { instance_double("UserRepository", find_by_email: user_params) }
+  let(:user_params) do
+    {
+      email: "some@email.com",
+      password: "some_password",
+      role: "admin"
+    }
+  end
+
+  let(:action) { described_class.new(repository: repository) }
+
   let(:messages) { [] }
   let(:output) { {} }
   let(:validation_result) do
@@ -20,20 +30,8 @@ describe Web::Controllers::Sessions::Create, type: :action do
   context 'with valid params' do
     let(:success) { true }
     let(:output) { Hash[session: { email: user_params[:email] }] }
-    let(:repository) { UserRepository.new }
-
-    let(:user_params) do
-      {
-        email: "some@email.com",
-        password: "some_password",
-        role: "admin"
-      }
-    end
 
     let(:params) { { session: user_params.slice(:email, :password) } }
-    let!(:user) { repository.create(user_params) }
-
-    after { repository.clear }
 
     it 'redirects the user to the home page' do
       response = action.call(params)

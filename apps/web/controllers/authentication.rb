@@ -1,5 +1,7 @@
 module Web
   module Authentication
+    PUBLIC_CONTROLLERS = %w[Sessions Registrations].freeze
+
     def self.included(action)
       action.class_eval do
         expose :current_user
@@ -9,12 +11,14 @@ module Web
     private
 
     def authenticate!
-      return if session_actions?
+      return if public_actions?
       redirect_to routes.new_session_path unless authenticated?
     end
 
-    def session_actions?
-      self.class.name.include?("Sessions")
+    def public_actions?
+      PUBLIC_CONTROLLERS.find do |controller|
+        self.class.name.include?(controller)
+      end
     end
 
     def authenticated?

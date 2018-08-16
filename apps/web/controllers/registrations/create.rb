@@ -1,16 +1,18 @@
-module Web::Controllers::Sessions
+module Web::Controllers::Registrations
   class Create
     include Web::Action
 
+    DEFAULT_ROLE = "user".freeze
+
     expose :form_errors
 
-    def initialize(repository: UserRepository.new)
-      @repository = repository
+    def initialize(interactor: Users::Creator.new)
+      @interactor = interactor
     end
 
     def call(_params)
       if valid?
-        session[:user] = user
+        session[:user] = new_user
         redirect_to routes.root_path
       else
         @form_errors = validation_result.messages
@@ -29,13 +31,13 @@ module Web::Controllers::Sessions
     end
 
     def validator
-      CreateSessionValidator.new(params)
+      RegistrationUserValidator.new(params)
     end
 
-    def user
-      @repository.find_by_email(
-        validation_result.output[:session][:email]
-      )
+    def new_user
+      @interactor.call(
+        validation_result.output[:user].merge(role: DEFAULT_ROLE)
+      ).user
     end
   end
 end
