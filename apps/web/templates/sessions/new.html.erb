@@ -1,0 +1,24 @@
+<% if form_errors %>
+  <div class="errors">
+    <ul>
+      <% errors.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%=
+  form_for form do
+    div do
+      label "Email"
+      text_field :email
+    end
+    div do
+      label "Password"
+      password_field :password
+    end
+
+    submit 'Sign in'
+  end
+%>

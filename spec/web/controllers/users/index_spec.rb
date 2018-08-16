@@ -13,13 +13,33 @@ describe Web::Controllers::Users::Index, type: :action do
     )
   end
 
-  it 'is successful' do
-    response = action.call(params)
-    expect(response[0]).to eq 200
+  let(:user) do
+    OpenStruct.new(
+      email: "some@email.com",
+      password: "some_password",
+      role: role,
+      admin?: role == "admin"
+    )
   end
 
-  it 'exposes paginator' do
-    action.call(params)
-    expect(action.exposures[:paginator]).to eq paginator_result
+  before { sign_in user }
+
+  context "as user" do
+    let(:role) { "user" }
+    it_behaves_like "protected resource"
+  end
+
+  context "as admin" do
+    let(:role) { "admin" }
+
+    it 'is successful' do
+      response = action.call(params)
+      expect(response[0]).to eq 200
+    end
+
+    it 'exposes paginator' do
+      action.call(params)
+      expect(action.exposures[:paginator]).to eq paginator_result
+    end
   end
 end

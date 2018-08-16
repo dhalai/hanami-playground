@@ -1,8 +1,9 @@
 describe Web::Views::Users::Create, type: :view do
-  let(:exposures) { Hash[format: :html] }
-  let(:template)  { Hanami::View::Template.new('apps/web/templates/users/create.html.erb') }
-  let(:view)      { described_class.new(template, exposures) }
-  let(:rendered)  { view.render }
+  let(:current_user) { OpenStruct.new(admin?: true) }
+  let(:exposures)    { Hash[format: :html, current_user: current_user] }
+  let(:template)     { Hanami::View::Template.new('apps/web/templates/users/create.html.erb') }
+  let(:view)         { described_class.new(template, exposures) }
+  let(:rendered)     { view.render }
 
   let(:form_errors) do
     {
@@ -14,7 +15,14 @@ describe Web::Views::Users::Create, type: :view do
     }
   end
 
-  let(:exposures) { Hash[format: :html, params: {}, form_errors: form_errors] }
+  let(:exposures) do
+    {
+      format: :html,
+      params: {},
+      form_errors: form_errors,
+      current_user: current_user
+    }
+  end
   let(:template)  { Hanami::View::Template.new('apps/web/templates/users/new.html.erb') }
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }

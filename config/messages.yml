@@ -1,0 +1,3 @@
+en:
+  errors:
+    valid_user?: "password or email is invalid"

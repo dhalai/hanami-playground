@@ -4,7 +4,8 @@ module Web::Controllers::Users
 
     expose :user, :form_errors
 
-    def initialize(interactor: Users::Updater.new)
+    def initialize(repository: UserRepository.new, interactor: Users::Updater.new)
+      @repository = repository
       @interactor = interactor
     end
 
@@ -21,11 +22,7 @@ module Web::Controllers::Users
     end
 
     def user
-      @user ||= repository.find(params[:id])
-    end
-
-    def repository
-      @repository ||= UserRepository.new
+      @user ||= @repository.find(params[:id])
     end
 
     def update_user

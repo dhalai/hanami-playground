@@ -3,6 +3,15 @@ module Web::Views::Users
     include Web::View
     include Hanami::Helpers
 
+    def filter_form
+      Form.new(
+        :filters,
+        routes.users_path,
+        Hash[filters: filters],
+        Hash[method: :get]
+      )
+    end
+
     def delete_link(user)
       form_for form(user) do
         submit 'delete'

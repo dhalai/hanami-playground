@@ -1,6 +1,15 @@
 describe Web::Views::Users::Index, type: :view do
   let(:paginator) { OpenStruct.new(result: result, rendered: "") }
-  let(:exposures) { Hash[format: :html, params: {}, paginator: paginator] }
+  let(:current_user) { OpenStruct.new(admin?: true) }
+  let(:exposures) do
+    {
+      format: :html,
+      params: {},
+      paginator: paginator,
+      filters: {},
+      current_user: current_user
+    }
+  end
   let(:template)  { Hanami::View::Template.new('apps/web/templates/users/index.html.erb') }
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }

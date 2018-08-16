@@ -4,6 +4,10 @@ module Web::Controllers::Users
 
     expose :user, :form_errors
 
+    def initialize(repository: UserRepository.new)
+      @repository = repository
+    end
+
     def call(_params)
       return redirect_to routes.users_path unless valid?
       @user = user
@@ -17,7 +21,7 @@ module Web::Controllers::Users
     end
 
     def user
-      @user ||= UserRepository.new.find(params[:id])
+      @user ||= @repository.find(params[:id])
     end
   end
 end

@@ -1,7 +1,7 @@
 <div class="filters">
   <h2>Filters</h2>
   <%=
-    form_for :filters, routes.users_path, method: :get do
+    form_for filter_form do
       div class: 'input' do
         label :email
         text_field :email

@@ -2,8 +2,12 @@ module Web::Controllers::Users
   class Destroy
     include Web::Action
 
+    def initialize(repository: UserRepository.new)
+      @repository = repository
+    end
+
     def call(params)
-      repository.delete(params[:id]) if valid?
+      @repository.delete(params[:id]) if valid?
       redirect_to routes.users_path
     end
 
@@ -15,11 +19,7 @@ module Web::Controllers::Users
     end
 
     def user
-      @user ||= repository.find(params[:id])
-    end
-
-    def repository
-      @repository ||= UserRepository.new
+      @user ||= @repository.find(params[:id])
     end
   end
 end
