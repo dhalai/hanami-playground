@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'hanami/setup'
 require 'hanami/model'
-require_relative '../lib/shakacode_test'
+require_relative '../lib/hanami_playground'
 require_relative '../apps/web/application'
 
 Hanami.configure do
@@ -14,9 +14,9 @@ Hanami.configure do
     # Available options:
     #
     #  * SQL adapter
-    #    adapter :sql, 'sqlite://db/shakacode_test_development.sqlite3'
-    #    adapter :sql, 'postgresql://localhost/shakacode_test_development'
-    #    adapter :sql, 'mysql://localhost/shakacode_test_development'
+    #    adapter :sql, 'sqlite://db/hanami_playground_development.sqlite3'
+    #    adapter :sql, 'postgresql://localhost/hanami_playground_development'
+    #    adapter :sql, 'mysql://localhost/hanami_playground_development'
     #
     adapter :sql, ENV.fetch('DATABASE_URL')
 
@@ -28,7 +28,7 @@ Hanami.configure do
   end
 
   mailer do
-    root 'lib/shakacode_test/mailers'
+    root 'lib/hanami_playground/mailers'
 
     # See http://hanamirb.org/guides/mailers/delivery
     delivery :test

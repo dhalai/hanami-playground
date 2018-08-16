@@ -1,4 +1,4 @@
-# Shakacode Test
+# Hanami Playground
 
 Welcome to your new Hanami project!
 
