@@ -1,14 +1,24 @@
 <% if current_user %>
-  <% if current_user.admin? %>
-    <div class="menu">
-      <%=link_to "Home", routes.root_path %>
-      <%=link_to "Users", routes.users_path %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <%=link_to "Home", routes.root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%=link_to "Users", routes.users_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+      <%=
+        form_for :session, routes.session_path, method: :delete, class: "form-inline" do
+          submit 'Sign out', class: "btn btn-link"
+        end
+      %>
     </div>
-  <% end %>
-
-  <%=
-    form_for :session, routes.session_path, method: :delete do
-      submit 'Sign out'
-    end
-  %>
+  </nav>
 <% end %>

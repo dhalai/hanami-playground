@@ -1,7 +1,11 @@
-<h2>Edit User #<%= user.id%></h2>
+<div class="container">
+  <h2>Edit User #<%= user.id%></h2>
 
-<%= render template: 'users/_form'%>
+  <%= render template: 'users/_form'%>
 
-<div>
-  <%= link_to "Back", routes.users_path %>
+  <div class="row mt-4">
+    <div class="col">
+      <%= link_to "Back", routes.users_path %>
+    </div>
+  </div>
 </div>

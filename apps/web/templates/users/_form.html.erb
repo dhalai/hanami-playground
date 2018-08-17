@@ -1,35 +1,46 @@
-<% if form_errors %>
-  <div class="errors">
-    <h3>There was a problem with your submission</h3>
-    <ul>
-      <% errors.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div class="row">
+  <div class="col-auto">
+    <% if form_errors %>
+      <div class="alert alert-danger errors" role="alert">
+        <ul>
+          <% errors.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%=
-  form_for form do
-    div class: 'input' do
-      label :email
-      email_field :email
-    end
+    <%=
+      form_for form, class: "form-group" do
+        div class: "form-group row" do
+          div class: "col-3" do
+            label :email, class: "col-form-label"
+          end
+          div class: "col-auto" do
+            email_field :email, class: "form-control"
+          end
+        end
 
-    div class: 'input' do
-      label :password
-      password_field :password
-    end
+        div class: "form-group row" do
+          div class: "col-3" do
+            label :password, class: "col-form-label"
+          end
+          div class: "col-auto" do
+            password_field :password, class: "form-control"
+          end
+        end
 
-    div class: 'input' do
-      user_roles.each do |role|
-        radio_button :role, role, id: "#{role}-role"
-        label role.to_sym, for: "#{role}-role"
+        div class: 'mb-4' do
+          user_roles.each do |role|
+            div class: "form-check form-check-inline" do
+              radio_button :role, role, id: "#{role}-role", class: "form-check-input"
+              label role.to_sym, for: "#{role}-role", class: "form-check-label"
+            end
+          end
+        end
+
+        submit submit_label, class: "btn btn-primary"
       end
-    end
-
-    div class: 'controls' do
-      submit submit_label
-    end
-  end
-%>
+    %>
+  </div>
+</div>

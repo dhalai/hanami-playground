@@ -1,26 +1,60 @@
-<h1>Users</h1>
+<div class="container">
+  <h1>Users</h1>
 
-<%= link_to 'New User', routes.path(:new_user) %>
+  <div class="row mb-4">
+    <div class="col">
+      <%=
+        link_to routes.path(:new_user) do
+          button "New User", class: "btn btn-primary"
+        end
+      %>
+    </div>
+  </div>
 
-<%= render template: "users/_filters" %>
+  <div class="row mb-4">
+    <div class="col">
+      <%= render template: "users/_filters" %>
+    </div>
+  </div>
 
-<br/>
-
-<% if paginator.result.any? %>
-  <div class="users">
-    <% paginator.result.each do |user| %>
-      <div class="user">
-        <span>#<%= user.id %></span>
-        <span><%= user.email %></span>
-        <span><%= user.role %></span>
-        <span><%= link_to 'show', routes.path(:user, user.id) %></span>
-        <span><%= link_to 'edit', routes.path(:edit_user, user.id) %></span>
-        <span><%= delete_link(user) %></span>
+  <% if paginator.result.any? %>
+    <div class="row users">
+      <div class="col">
+        <div class="row font-weight-bold mb-2">
+          <div class="col">ID</div>
+          <div class="col">Email</div>
+          <div class="col">Role</div>
+          <div class="col">Actions</div>
+        </div>
+        <% paginator.result.each do |user| %>
+          <div class="row user mb-2">
+            <div class="col"><%= user.id %></div>
+            <div class="col"><%= user.email %></div>
+            <div class="col"><%= user.role %></div>
+            <div class="col">
+              <div class="row">
+                <div class="col-2">
+                  <%= link_to 'show', routes.path(:user, user.id) %>
+                </div>
+                <div class="col-2">
+                  <%= link_to 'edit', routes.path(:edit_user, user.id) %>
+                </div>
+                <div class="col-2">
+                  <%= delete_link(user) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end%>
       <div>
-    <% end%>
-  <div>
-<% else %>
-  <p>There are no users yet.</p>
-<% end %>
+    <div>
+  <% else %>
+    <p>There are no users yet.</p>
+  <% end %>
 
-<%= paginator.pagination %>
+  <div class="row mt-4">
+    <div class="col">
+      <%= paginator.pagination %>
+    </div>
+  </div>
+</div>

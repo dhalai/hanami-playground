@@ -28,8 +28,6 @@ describe Web::Views::Users::Create, type: :view do
   let(:rendered)  { view.render }
 
   it 'displays list of errors when params contains errors' do
-    expect(rendered.include?('There was a problem with your submission')).to be true
-
     form_errors[:user].each do |field, msg|
       expect(rendered.include?("#{field.capitalize} #{msg.join(',')}")).to be true
     end

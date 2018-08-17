@@ -47,7 +47,6 @@ describe 'Add a user' do
       context 'invalid form' do
         let(:messages) do
           [
-            "There was a problem with your submission",
             "Email must be filled",
             "Password must be filled",
             "Role is missing"

@@ -1,7 +1,11 @@
 <%if count_pages > 1 %> 
-  <div class='paginator'>
-    <% count_pages.times do |page| %>
-      <%= page_link(page) %>
-    <% end %>
-  </div>
+  <nav class="paginator">
+    <ul class="pagination">
+      <% count_pages.times do |page| %>
+        <li class="page-item">
+          <%= page_link(page) %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
 <% end %>

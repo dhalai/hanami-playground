@@ -1,12 +1,16 @@
-<h1>User #<%= user.id %></h1>
+<div class="container">
+  <h1>User #<%= user.id %></h1>
 
-<% user.to_h.each do |field, value| %>
-  <div>
-    <span><b><%= field.capitalize %>:</b></span>
-    <span><%= value %></span>
+  <% user.to_h.each do |field, value| %>
+    <div class="row">
+      <div class="col-2 font-weight-bold"><%= field.capitalize %>:</div>
+      <div class="col-auto"><%= value %></div>
+    </div>
+  <% end %>
+
+  <div class="row mt-4">
+    <div class="col">
+      <%= link_to "Back", routes.users_path %>
+    </div>
   </div>
-<% end %>
-
-<div>
-  <%= link_to "Back", routes.users_path %>
 </div>

@@ -7,8 +7,10 @@ gem 'hanami',       '~> 1.2'
 gem 'hanami-model', '~> 1.2'
 
 gem 'pg'
-
 gem 'bcrypt'
+
+gem 'sass'
+gem 'bootstrap', '~> 4.1.3'
 
 group :development do
   gem 'shotgun', platforms: :ruby

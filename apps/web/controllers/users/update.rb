@@ -40,7 +40,7 @@ module Web::Controllers::Users
     end
 
     def validator
-      CreateUserValidator.new(params)
+      UpdateUserValidator.new(params)
     end
   end
 end

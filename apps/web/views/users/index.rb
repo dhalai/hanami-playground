@@ -13,8 +13,8 @@ module Web::Views::Users
     end
 
     def delete_link(user)
-      form_for form(user) do
-        submit 'delete'
+      form_for form(user), class: "form-inline" do
+        submit 'delete', class: "btn btn-link p-0"
       end
     end
 

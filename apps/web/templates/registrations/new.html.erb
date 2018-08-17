@@ -1,26 +1,36 @@
-<% if form_errors %>
-  <div class="errors">
-    <ul>
-      <% errors.each do |message| %>
-        <li><%= message %></li>
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-4">
+      <h2>Sign Up</h2>
+
+      <% if form_errors %>
+        <div class="alert alert-danger errors" role="alert">
+          <ul>
+            <% errors.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
+
+      <%=
+        form_for form, class: "form-group" do
+          div class: "form-group" do
+            label "Email"
+            email_field :email, class: "form-control"
+          end
+
+          div class: "form-group" do
+            label "Password"
+            password_field :password, class: "form-control"
+          end
+
+          submit 'Sign up', class: "btn btn-primary"
+        end
+      %>
+
+    <div>
+      <%= link_to "Sign in", routes.new_session_path %>
+    </div>
   </div>
-<% end %>
-
-<%=
-  form_for form do
-    div do
-      label "Email"
-      text_field :email
-    end
-    div do
-      label "Password"
-      password_field :password
-    end
-
-    submit 'Sign up'
-  end
-%>
-
-<%= link_to "Sign in", routes.new_session_path %>
+</div>

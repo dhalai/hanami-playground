@@ -65,12 +65,7 @@ describe 'Edit the user' do
         end
 
         context 'invalid form' do
-          let(:messages) do
-            [
-              "There was a problem with your submission",
-              "Password must be filled"
-            ]
-          end
+          let(:messages) { ["Password must be filled"] }
 
           it 'displays list of errors' do
             within 'form#user-form' do

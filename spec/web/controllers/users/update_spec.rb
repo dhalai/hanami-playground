@@ -30,7 +30,7 @@ describe Web::Controllers::Users::Update, type: :action do
   end
 
   let(:validator_instance) do
-    instance_double("CreateUserValidator", validate: validation_result)
+    instance_double("UpdateUserValidator", validate: validation_result)
   end
 
   let(:id_validation_success) { true }
@@ -42,7 +42,7 @@ describe Web::Controllers::Users::Update, type: :action do
 
   before do
     allow(IdValidator).to receive(:new).and_return(id_validator_instance)
-    allow(CreateUserValidator).to receive(:new).and_return(validator_instance)
+    allow(UpdateUserValidator).to receive(:new).and_return(validator_instance)
     sign_in user
   end
 

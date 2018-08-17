@@ -46,7 +46,7 @@ describe Web::Views::Users::Index, type: :view do
     let(:result) { [user_1, user_2] }
 
     it 'shows all users' do
-      expect(rendered.scan(/class="user"/).count).to eq 2
+      expect(rendered.scan(/row user mb-2/).count).to eq 2
     end
 
     it 'does not show the placeholder' do
